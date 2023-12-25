@@ -29,9 +29,9 @@ global:
     ##
     auth:
       postgresPassword: ""
-      username: ""
-      password: ""
-      database: ""
+      username: "fastapi"
+      password: "3FtarE9UWS"
+      database: "fastapi"
       existingSecret: ""
       secretKeys:
         adminPasswordKey: ""
