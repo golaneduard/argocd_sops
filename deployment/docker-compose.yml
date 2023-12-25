@@ -10,10 +10,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=fastapi
   fastapi:
-    image: fastapi:1.0
+    image: egolan/fastapi:2.0
     ports:
       - 8000:8000
     volumes:
-      - .env:/app/.env
+      - ../.env:/app/.env
     depends_on:
       - postgres
