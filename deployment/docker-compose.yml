@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=fz8kqCeLsv
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=fastapi
+  fastapi:
+    image: fastapi:1.0
+    ports:
+      - 8000:8000
+    volumes:
+      - .env:/app/.env
+    depends_on:
+      - postgres
