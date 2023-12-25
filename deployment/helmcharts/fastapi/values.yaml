@@ -14,7 +14,14 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-command: ["/usr/local/bin/uvicorn", "main:app", "--host", "0.0.0.0"]
+entryPoint:
+  enabled: true
+  command:
+    - "uvicorn"
+    - "main:app"
+  args:
+    - "--host"
+    - "0.0.0.0"
 
 serviceAccount:
   # Specifies whether a service account should be created

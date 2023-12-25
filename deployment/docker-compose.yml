@@ -10,9 +10,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=fastapi
   fastapi:
-    image: egolan/fastapi:2.0
+    image: egolan/fastapi:4.0
     ports:
       - 8000:8000
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0"]
     volumes:
       - ../.env:/app/.env
     depends_on:

@@ -35,14 +35,10 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command:
-            - "uvicorn"
-            - "main:app"
-          args:
-            - "--host"
-            - "0.0.0.0"
-{{/*          command: [ "/bin/sh", "-c", "--" ]*/}}
-{{/*          args: [ "while true; do sleep 30; done;" ]*/}}
+          {{- if .Values.entryPoint.enabled }}
+          command: {{- .Values.entryPoint.command | toYaml | nindent 12 }}
+          args:  {{- .Values.entryPoint.args | toYaml | nindent 12 }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
