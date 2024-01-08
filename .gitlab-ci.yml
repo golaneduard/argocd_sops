@@ -28,6 +28,7 @@ build:
       - main
   script:
 #    - cat ${GCR_SERVICE_KEY} | docker login -u _json_key --password-stdin https://gcr.io
+    - echo "$DOCKER_REGISTRY_PASS" | docker login --username $DOCKER_REGISTRY_USER --password-stdin
     - docker build -t "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}" -f deployment/Dockerfile .
     - docker push "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}"
 
@@ -41,7 +42,7 @@ deploy:
   stage: deploy
   only:
     refs:
-      - development
+      - main
   script:
     - *argocd
 #    - argocd app set ${ARGOCD_APP_NAME} --plugin-env DOCKER_IMAGE_REGISTRY=${DOCKER_IMAGE_REGISTRY} --plugin-env DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG}
