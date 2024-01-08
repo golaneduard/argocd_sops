@@ -36,7 +36,7 @@ deploy:
   environment: ${CI_COMMIT_REF_NAME}
   image: 
 #    name: "gitlab.devebs.net:4567/templates/images/argocd:v2.5.2.1"
-    name: "argoproj/argocd-cli:v0.10.6"
+    name: "argoproj/argocd:v2.6.15"
   extends:
     - .export-vars
   stage: deploy
