@@ -1,0 +1,49 @@
+variables:
+  DOCKER_IMAGE_TAG: ${CI_PIPELINE_IID}-${CI_COMMIT_SHORT_SHA}-$CI_COMMIT_REF_NAME
+  TIMEOUT_SYNC: 300
+  
+# List of stages for jobs, and their order of execution 
+stages:
+  - build
+  - deploy
+
+#Export env vars
+.export-vars:
+  before_script:
+    - export $(grep -v '^#' ${envVars} | tr -d ' ' | xargs)
+
+#ArgoCD Connect
+.argocd: &argocd |
+  argocd login ${ARGOCD_SERVER_URL} --insecure --grpc-web --username ${ARGOCD_USERNAME} --password ${ARGOCD_PASSWORD}
+
+build:
+  image: docker:latest
+  environment: ${CI_COMMIT_REF_NAME}
+  stage: build
+  services:
+    - docker:dind
+  extends: .export-vars
+  only:
+    refs:
+      - main
+  script:
+#    - cat ${GCR_SERVICE_KEY} | docker login -u _json_key --password-stdin https://gcr.io
+    - docker build -t "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}" -f deployment/Dockerfile .
+    - docker push "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}"
+
+deploy:
+  environment: ${CI_COMMIT_REF_NAME}
+  image: 
+#    name: "gitlab.devebs.net:4567/templates/images/argocd:v2.5.2.1"
+    name: "argoproj/argocd-cli:v0.10.6"
+  extends:
+    - .export-vars
+  stage: deploy
+  only:
+    refs:
+      - development
+  script:
+    - *argocd
+#    - argocd app set ${ARGOCD_APP_NAME} --plugin-env DOCKER_IMAGE_REGISTRY=${DOCKER_IMAGE_REGISTRY} --plugin-env DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG}
+    - argocd app sync --timeout ${TIMEOUT_SYNC} ${ARGOCD_APP_NAME}
+    - argocd app wait ${ARGOCD_APP_NAME}
