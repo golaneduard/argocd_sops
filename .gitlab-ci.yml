@@ -47,5 +47,6 @@ deploy:
   script:
     - *argocd
 #    - argocd app set ${ARGOCD_APP_NAME} --plugin-env DOCKER_IMAGE_REGISTRY=${DOCKER_IMAGE_REGISTRY} --plugin-env DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG}
+    - argocd app set ${ARGOCD_APP_NAME} -p image.repository=${DOCKER_IMAGE_REGISTRY} -p image.tag=${DOCKER_IMAGE_TAG}
     - argocd app sync --timeout ${TIMEOUT_SYNC} ${ARGOCD_APP_NAME}
     - argocd app wait ${ARGOCD_APP_NAME}

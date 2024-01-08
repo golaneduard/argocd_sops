@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: egolan/fastapi
+  repository: default
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "6.0"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
