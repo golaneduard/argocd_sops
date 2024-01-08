@@ -8,7 +8,7 @@ image:
   repository: egolan/fastapi
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "6.0"
+  tag: "7.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -92,6 +92,13 @@ volumes:
   - name: envars
     configMap:
       name: fastapi-envars
+
+envVars:
+  POSTGRESQL_ADDRRESS: "10.100.143.29"
+  POSTGRESQL_DATABASE: "postgres"
+  POSTGRESQL_USER: "postgres"
+  POSTGRESQL_PASSWORD: "zlLHli8ltd"
+  POSTGRESQL_PORT: "5432"
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
