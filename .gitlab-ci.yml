@@ -14,7 +14,7 @@ stages:
 
 #ArgoCD Connect
 .argocd: &argocd |
-  argocd login ${ARGOCD_SERVER_URL} --insecure --grpc-web --username ${ARGOCD_USERNAME} --password ${ARGOCD_PASSWORD}
+  argocd login ${ARGOCD_SERVER_URL} --insecure --username ${ARGOCD_USERNAME} --password ${ARGOCD_PASSWORD}
 
 build:
   image: docker:latest
