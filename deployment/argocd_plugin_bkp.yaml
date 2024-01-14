@@ -14,7 +14,6 @@
        init :
          command :  [sh, -c, 'echo "Initializing Plugin SOPS"'] 
        generate :
-         command: [ sh, -c, "bash ./decrypt_sops_secrets.sh && helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG} -f secrets/development/secrets.decrypted.yaml "  ]
+         command: [ sh, -c, "helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG}"  ]
        discover :
          fileName : " ./values.yaml "
-         

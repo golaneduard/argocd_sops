@@ -1,5 +1,5 @@
-FROM quay.io/argoproj/argocd:v2.9.3
-ARG SOPS_VERSION=v3.8.1
+FROM quay.io/argoproj/argocd:v2.4.11
+ARG SOPS_VERSION=v3.7.3
 
 # Switch to root for the ability to perform install
 USER root
