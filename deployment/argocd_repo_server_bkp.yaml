@@ -1,0 +1,31 @@
+#...
+   containers :
+    -  command :
+       -  /var/run/argocd/argocd-cmp-server
+       image :  egolan/argocd:argo-plugin-v1
+       imagePullPolicy :  Always
+       name :  sops-plugin
+       resources : {}
+       securityContext :
+         runAsNonRoot :  true
+         runAsUser :  999
+       terminationMessagePath :  /dev/termination-log
+       terminationMessagePolicy :  File
+       volumeMounts :
+        -  mountPath :  /var/run/argocd
+           name :  var-files
+        -  mountPath :  /home/argocd/cmp-server/plugins
+           name :  plugins
+        -  mountPath :  /home/argocd/cmp-server/config/plugin.yaml
+           name :  sops-plugin-config
+           subPath :  plugin.yaml
+        -  mountPath :  /tmp
+           name :  cmp-tmp
+   volumes :
+    -  configMap :
+         defaultMode :  420
+         name :  sops-plugin-config
+       name :  sops-plugin-config
+    -  emptyDir : {}
+       name :  cmp-tmp
+#...
