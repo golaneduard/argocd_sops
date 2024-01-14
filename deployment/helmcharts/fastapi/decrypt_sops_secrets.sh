@@ -4,7 +4,7 @@
 #config_path=config
 #temporary_name=secret.decrypted.json
 #decrypted_file_name=secret.service.account.key.decrypted.json
-secrets_path=secrets/*
+secrets_path=secrets/$ENVIRONMENT
 ARN=arn:aws:kms:eu-central-1:209591221760:key/6c7d633f-e5b0-4c88-a72a-ee864caeb5f3
 
 # Loop for decrypt service account key and format like passowrd for docker pull secret "_helper.tpl"
