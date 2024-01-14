@@ -1,19 +1,19 @@
- apiVersion :  v1
- kind :  ConfigMap
- metadata :
-   name :  sops-plugin-config
-   namespace :  argocd
- data :
-   plugin.yaml :  | 
-     apiVersion :  argoproj.io/v1alpha1 
-     kind :  ConfigManagementPlugin 
-     metadata :
-       name :  sops-plugin 
-     spec :
-       version :  v1.0 
-       init :
-         command :  [sh, -c, 'echo "Initializing Plugin SOPS"'] 
-       generate :
-         command: [ sh, -c, "helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG}"  ]
-       discover :
-         fileName : " ./values.yaml "
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sops-plugin-config
+  namespace: argocd  
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: sops-plugin
+    spec:
+      version: v1.0
+      init:
+        command: [sh, -c, 'echo "Initializing Plugin SOPS"']
+      generate:
+        command: [sh, -c, 'helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG}']
+      discover:
+        fileName: "./values.yaml"
