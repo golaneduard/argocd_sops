@@ -94,10 +94,10 @@ volumes:
       name: fastapi-envars
 
 envVars:
-  POSTGRESQL_ADDRRESS: "10.100.143.29"
+  POSTGRESQL_ADDRRESS: "postgresql.postgresql.svc.cluster.local"
   POSTGRESQL_DATABASE: "postgres"
   POSTGRESQL_USER: "postgres"
-  POSTGRESQL_PASSWORD: "zlLHli8ltd"
+  POSTGRESQL_PASSWORD: "0qzvp83y1L"
   POSTGRESQL_PORT: "5432"
 
 # Additional volumeMounts on the output Deployment definition.
