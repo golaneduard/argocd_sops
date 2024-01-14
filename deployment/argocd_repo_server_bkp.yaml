@@ -8,7 +8,7 @@ spec:
      containers :
       -  command :
          -  /var/run/argocd/argocd-cmp-server
-         image :  egolan/argocd:argo-plugin-v1
+         image :  egolan/argocd:argo-plugin-v6
          imagePullPolicy :  Always
          name :  sops-plugin
          resources : {}
