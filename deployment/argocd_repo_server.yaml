@@ -17,6 +17,22 @@ spec:
            runAsUser :  999
          terminationMessagePath :  /dev/termination-log
          terminationMessagePolicy :  File
+         env:
+           - name: AWS_ACCESS_KEY_ID
+             valueFrom:
+               secretKeyRef:
+                 name: aws-secret
+                 key: AWS_ACCESS_KEY_ID
+           - name: AWS_SECRET_ACCESS_KEY
+             valueFrom:
+               secretKeyRef:
+                 name: aws-secret
+                 key: AWS_SECRET_ACCESS_KEY
+           - name: AWS_DEFAULT_REGION
+             valueFrom:
+               secretKeyRef:
+                 name: aws-secret
+                 key: AWS_DEFAULT_REGION
          volumeMounts :
           -  mountPath :  /var/run/argocd
              name :  var-files
