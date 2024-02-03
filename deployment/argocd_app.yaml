@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fastapi-sqlalchemy
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: deployment/helmcharts/fastapi
+    repoURL: 'git@gitlab.com:eduard.golan/fastapi_sqlalchemy.git'
+    targetRevision: main
+    plugin:
+      name: sops-plugin-v1.0
+      env:
+        - name: ARGOCD_APP_NAME
+          value: test
+        - name: DOCKER_IMAGE_TAG
+          value: test
+        - name: DOCKER_IMAGE_REGISTRY
+          value: test
+        - name: ENVIRONMENT
+          value: development
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - ApplyOutOfSyncOnly=true

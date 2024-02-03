@@ -6,7 +6,7 @@ secrets_path=secrets/$ENVIRONMENT
 # Loop for decrypt secrets in config folder
 decrypt_envfile_secrets () {
     for folder in $secrets_path; do
-#            sops -d --kms $ARN $folder/secrets_backup.yaml > $folder/secrets.yaml
+#            sops -d --kms $ARN $folder/secrets_backup_aws.yaml > $folder/secrets_backup_gcp.yaml
             sops -d $folder/secrets.yaml > $folder/secrets.decrypted.yaml
     done
 }

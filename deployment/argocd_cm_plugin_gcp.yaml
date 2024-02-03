@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sops-plugin-config
+  namespace: argocd-test
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: sops-plugin
+    spec:
+      version: v1.0
+      init:
+        command: [sh, -c, 'echo "Initializing Plugin SOPS"']
+      generate:
+        command: [ sh, -c, "export ENVIRONMENT=${ARGOCD_ENV_ENVIRONMENT} && GOOGLE_APPLICATION_CREDENTIALS=/home/argocd/google_key/watchful-idea-411917-5a0b97b4d14f.json bash ./decrypt_sops_secrets.sh && helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG} -f secrets/${ARGOCD_ENV_ENVIRONMENT}/secrets.decrypted.yaml" ]
+      discover:
+        fileName: "./values.yaml"
