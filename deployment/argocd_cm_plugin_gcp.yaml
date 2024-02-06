@@ -14,6 +14,6 @@ data:
       init:
         command: [sh, -c, 'echo "Initializing Plugin SOPS"']
       generate:
-        command: [ sh, -c, "export ENVIRONMENT=${ARGOCD_ENV_ENVIRONMENT} && GOOGLE_APPLICATION_CREDENTIALS=/home/argocd/google_key/watchful-idea-411917-8c746fa6d472.json bash ./decrypt_sops_secrets.sh && helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG} -f secrets/${ARGOCD_ENV_ENVIRONMENT}/secrets.decrypted.yaml" ]
+        command: [ sh, -c, "export ENVIRONMENT=${ARGOCD_ENV_ENVIRONMENT} && GOOGLE_APPLICATION_CREDENTIALS=/home/argocd/google_key/watchful-idea-411917-9c6ac0561097.json bash ./decrypt_sops_secrets.sh && helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG} -f secrets/${ARGOCD_ENV_ENVIRONMENT}/secrets.decrypted.yaml" ]
       discover:
         fileName: "./values.yaml"

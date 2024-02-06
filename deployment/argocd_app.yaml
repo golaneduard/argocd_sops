@@ -27,5 +27,3 @@ spec:
   syncPolicy:
     syncOptions:
       - ApplyOutOfSyncOnly=true
-
-Unable to create application: application spec for fastapi-sqlalchemy is invalid: InvalidSpecError: Unable to generate manifests in deployment/helmcharts/fastapi: rpc error: code = Unknown desc = plugin sidecar failed. error generating manifests in cmp: rpc error: code = Unknown desc = error generating manifests: `sh -c "export ENVIRONMENT=${ARGOCD_ENV_ENVIRONMENT} && GOOGLE_APPLICATION_CREDENTIALS=/home/argocd/google_key/watchful-idea-411917-8c746fa6d472.json bash ./decrypt_sops_secrets.sh && helm template ${ARGOCD_ENV_ARGOCD_APP_NAME} . --set image.repository=${ARGOCD_ENV_DOCKER_IMAGE_REGISTRY} --set image.tag=${ARGOCD_ENV_DOCKER_IMAGE_TAG} -f secrets/${ARGOCD_ENV_ENVIRONMENT}/secrets.decrypted.yaml"` failed exit status 1: sops metadata not found
