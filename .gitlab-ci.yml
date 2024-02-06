@@ -1,5 +1,5 @@
 variables:
-  ARGOCD_APP_NAME: "fastapi-sqlalchemy"
+#  ARGOCD_APP_NAME: "fastapi-sqlalchemy"
   DOCKER_IMAGE_TAG: ${CI_PIPELINE_IID}-${CI_COMMIT_SHORT_SHA}-$CI_COMMIT_REF_NAME
   TIMEOUT_SYNC: 300
   
@@ -27,16 +27,33 @@ build:
   only:
     refs:
       - main
+      - development
   script:
     - cat ${GCR_SERVICE_KEY} | docker login -u _json_key --password-stdin https://gcr.io
 #    - echo "$DOCKER_REGISTRY_PASS" | docker login --username $DOCKER_REGISTRY_USER --password-stdin
     - docker build -t "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}" -f deployment/Dockerfile .
     - docker push "${DOCKER_IMAGE_REGISTRY}:${DOCKER_IMAGE_TAG}"
 
-deploy:
-  environment: ${CI_COMMIT_REF_NAME}
-  image: 
-#    name: "gitlab.devebs.net:4567/templates/images/argocd:v2.5.2.1"
+deploy_dev:
+  environment: development
+  image:
+    name: "argoproj/argocd:v2.6.15"
+  extends:
+    - .export-vars
+  stage: deploy
+  only:
+    refs:
+      - development
+  script:
+    - *argocd
+#    - echo ${ENVIRONMENT} ${DOMAIN} ${NAMESPACE} ${DOCKER_IMAGE_REGISTRY} ${DOCKER_IMAGE_TAG}
+    - argocd app set fastapi-${ENVIRONMENT} --plugin-env ARGOCD_APP_NAME=fastapi-${ENVIRONMENT} --plugin-env DOMAIN=${DOMAIN} --plugin-env NAMESPACE=${NAMESPACE} --plugin-env ENVIRONMENT=${ENVIRONMENT} --plugin-env DOCKER_IMAGE_REGISTRY=${DOCKER_IMAGE_REGISTRY} --plugin-env DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG}
+    - argocd app sync --timeout ${TIMEOUT_SYNC} fastapi-${ENVIRONMENT}
+    - argocd app wait fastapi-${ENVIRONMENT}
+
+deploy_staging:
+  environment: staging
+  image:
     name: "argoproj/argocd:v2.6.15"
   extends:
     - .export-vars

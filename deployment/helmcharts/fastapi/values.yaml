@@ -58,11 +58,7 @@ ingress:
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: fastapi.cicd.website
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  host: fastapi.cicd.website
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

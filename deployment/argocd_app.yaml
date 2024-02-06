@@ -22,6 +22,10 @@ spec:
           value: test
         - name: ENVIRONMENT
           value: development
+        - name: NAMESPACE
+          value: default
+        - name: DOMAIN
+          value: test
   sources: []
   project: default
   syncPolicy:
