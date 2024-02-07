@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "fastapi.name" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "fastapi.labels" . | nindent 4 }}
 spec:

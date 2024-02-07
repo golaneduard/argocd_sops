@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fastapi-sqlalchemy
+  name: fastapi-development
 spec:
   destination:
     name: ''
@@ -23,7 +23,7 @@ spec:
         - name: ENVIRONMENT
           value: development
         - name: NAMESPACE
-          value: default
+          value: test
         - name: DOMAIN
           value: test
   sources: []
