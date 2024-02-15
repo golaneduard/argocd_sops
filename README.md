@@ -58,3 +58,4 @@ _Mention_: Be aware if you have different ingress class name to change it, also 
 argocd admin initial-password --insecure https://argocd.domain.com
 ```
 7. Login with credentials to your ArgoCD dashboard and add gitlab repository
+![Untitled (1)](https://github.com/golaneduard/argocd_sops/assets/45820611/75910ac3-55af-4266-9fbb-66d134dd7056)
