@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: "nginx"
   rules:
-  - host: argocd.cicd.website
+  - host: argocd.domain.com
     http:
       paths:
       - path: /
