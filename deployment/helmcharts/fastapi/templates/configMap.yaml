@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "fastapi.name" . }}-envars
-  namespace: {{ .Values.namespace }}
   labels:
     {{- include "fastapi.labels" . | nindent 4 }}
 data:

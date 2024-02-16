@@ -10,8 +10,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-namespace: default
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -60,7 +58,7 @@ ingress:
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  host: fastapi.cicd.website
+  host: default
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
