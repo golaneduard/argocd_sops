@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fastapi-development
+  name: fastapi-<development/staging>
 spec:
   destination:
     name: ''
-    namespace: default
+    namespace: <development/staging>
     server: 'https://kubernetes.default.svc'
   source:
     path: deployment/helmcharts/fastapi
-    repoURL: 'git@gitlab.com:eduard.golan/fastapi_sqlalchemy.git'
-    targetRevision: main
+    repoURL: 'git@gitlab.com:repository-url.git'
+    targetRevision: <development/staging>
     plugin:
       name: sops-plugin-v1.0
       env:
@@ -22,8 +22,6 @@ spec:
           value: test
         - name: ENVIRONMENT
           value: development
-        - name: NAMESPACE
-          value: test
         - name: DOMAIN
           value: test
   sources: []
