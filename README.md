@@ -1,4 +1,4 @@
-# Configure ArgoCD Pipeline with GitlabCI, SOPS Secrets and HelmCharts
+# Configure ArgoCD Pipeline with GitlabCI, SOPS Secrets and HelmCharts test
 
 ---
 This repository will help you to configure for your application an CI/CD pipeline with building an docker image and deploying on Kubernetes Cluster.\
