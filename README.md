@@ -60,17 +60,14 @@ $ argocd admin initial-password --insecure https://argocd.domain.com
 ```
 7. Login with credentials to your ArgoCD dashboard and add gitlab repository
 ![Untitled (1)](https://github.com/golaneduard/argocd_sops/assets/45820611/75910ac3-55af-4266-9fbb-66d134dd7056)
-[IMAGE_add_repo_argocd]\
+![CleanShot 2024-02-16 at 22 26 35 2@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/065524d9-958b-4e82-b15e-27e53415fdca)
+![CleanShot 2024-02-16 at 22 32 00@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/0078cea4-fc91-421d-8e73-0d085fa06d68)
 _Mention_: If you connected with success, you must to have green status on dashboard, like next picture.\
-[IMAGE_add_repo_argocd_status]
-8. Create `GCP Service Account Key` (for the beginning you can delegate full access to project for testing purpose)
-[IMAGE_create_service_account]
-[IMAGE_create_service_account]
-[IMAGE_create_service_account]
-[IMAGE_create_service_account]
-[IMAGE_create_service_account]
-[IMAGE_create_service_account]
-9. Create kubernetes secret with `gcp-sa-key`
+9. Create `GCP Service Account Key` (for the beginning you can delegate full access to project for testing purpose)
+![CleanShot 2024-02-16 at 22 27 49@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/830701a0-a9d0-4ce5-a66e-c44b4a3e221c)
+![CleanShot 2024-02-16 at 22 29 37@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/225db3a8-7416-42ed-99eb-5ad53acb651b)
+![CleanShot 2024-02-16 at 22 30 55@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/6bfbe27a-437f-43d5-8978-de82cf726e66)
+10. Create kubernetes secret with `gcp-sa-key`
 ```
 $ kubectl create secret -n argocd generic sa-gcr-key --from-file=my-secret.json
 ```
@@ -140,7 +137,7 @@ ARGOCD_USERNAME=admin
 ARGOCD_PASSWORD=<secure_password>
 ```
 _Mention_: ENVIRONMENT variable is used in pipeline to provide from which path to decrypt secrets\
-[IMAGE_screenshot_of_ci_cd_variables]
+![CleanShot 2024-02-16 at 22 33 32@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/fb15d3bb-d4b2-47fd-bb52-0cf5866f4a61)
 15. Create in Gitlab, CI/CD variable with name `GCR_SERVICE_KEY` and next parameters: _Environment -_ **development/staging**, _Type - file_
 ```
 {
@@ -215,4 +212,6 @@ sops --encrypt --gcp-kms projects/<project-name>/locations/global/keyRings/sops/
 $ git add :/ && git commit -m "$*" && git push
 ```
 24. Create argocd application in web-ui `deployment/argocd_app.yaml`. Create two application with each environment `development/staging` (do not forget to update `name,namespace,targetRevision,repoURL,`)
-[IMAGE_create_argocd_app]
+![CleanShot 2024-02-16 at 22 34 53@2x](https://github.com/golaneduard/argocd_sops/assets/45820611/3b90abbb-7608-4adc-9709-bcc2004f3539)
+
+# Done, if you have encountered any issue at setup, you can open issue in the repository with question, I will do my best to help you !
